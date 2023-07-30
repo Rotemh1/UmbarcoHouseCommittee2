@@ -1,0 +1,55 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MainPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+<html>
+	<head>
+		<style>
+			body{
+				direction: rtl;
+				background-color: grey;
+			}
+			body form{
+				direction: rtl;
+				background-color: grey;
+			}
+			.header-div{
+				margin-bottom: 2vw;
+			}
+			.form-group{
+				margin: 1vw;
+				font-size: 20px;
+				font-weight: bold;
+				color: lime;
+			}
+			.payment-group{
+				direction: rtl;
+				width: 15%;
+				justify-content: right;
+				justify-items: right;
+				justify-self: right;
+			}
+			.input-group{
+				display: flex;
+				flex-direction: column;
+				margin: 2vw;
+			}
+			.form-div{
+				font-size: 22px;
+				margin: 2vw;
+				color: fuchsia;
+			}
+		</style>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="header-div">
+			<h1>טופס הפקת תשלום לדייר</h1>
+		</div>
+		<div>
+		    @await Umbraco.RenderMacroAsync("PaymentForm")
+		</div>
+	</body>
+</html>

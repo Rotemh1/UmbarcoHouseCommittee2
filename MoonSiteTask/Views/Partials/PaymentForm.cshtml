@@ -1,0 +1,67 @@
+﻿@using MoonSiteTask.Controllers
+@model MoonSiteTask.Models.PaymentFormViewModel
+@using (Html.BeginUmbracoForm<PaymentFormController>(nameof(PaymentFormController.Submit)))
+{
+
+    <div class="input-group">
+        <div class="form-div">
+        <label asp-for="ResName">שם הדייר</label>
+        <input asp-for="ResName" type="text" />
+        </div>
+        <div class="form-div">
+        <label asp-for="AptNum">מס' דירה</label>
+        <select asp-for="AptNum" >
+        @{
+            for(int i=1; i<=12; i++){
+                <option value="@i">@i</option>
+            }
+        }
+        </select >
+        </div>
+        <div class="form-div">
+                <label>חודש לתשלום</label>
+                <input type="checkbox" value="0" id="jan"/>
+                <label for="jan">ינואר</label>
+                <input type="checkbox" value="1" id="feb"/>
+                <label for="feb">פברואר</label>                
+                <input type="checkbox" value="2" id="mar"/>
+                <label for="mar">מרץ</label>
+                <input type="checkbox" value="3" id="apr"/>
+                <label for="apr">אפריל</label>
+                <input type="checkbox" value="4" id="may"/>
+                <label for="may">מאי</label>
+                <input type="checkbox" value="5" id="jun"/>
+                <label for="jun">יוני</label>
+                <input type="checkbox" value="6" id="jul"/>
+                <label for="jul">יולי</label>
+                <input type="checkbox" value="7" id="aug"/>
+                <label for="aug">אוגוסט</label>
+                <input type="checkbox" value="8" id="sep"/>
+                <label for="sep">ספטמבר</label>
+                <input type="checkbox" value="9" id="oct"/>
+                <label for="oct">אוקטובר</label>
+                <input type="checkbox" value="10" id="nov"/>
+                <label for="nov">נובמבר</label>
+                <input type="checkbox" value="11" id="dec"/>
+                <label for="dec">דצמבר</label>
+        </div>
+        <div class="form-div">
+        <label asp-for="PayedWith">שולם באמצעות</label>
+            <input type="radio" id="CreditCard" name="fav_language" value="CreditCard" asp-for="PayedWith">
+            <label for="CreditCard">CreditCard</label><br>
+            <input type="radio" id="Cash" name="fav_language" value="Cash" asp-for="PayedWith">
+            <label for="Cash">Cash</label><br>
+            <input type="radio" id="Transfer" name="fav_language" value="Transfer" asp-for="PayedWith">
+            <label for="Transfer">Transfer</label>
+            <input type="radio" id="checkPayment" name="fav_language" value="checkPayment" asp-for="PayedWith">
+            <label for="checkPayment">checkPayment</label>
+        </div>
+        <div class="form-div">
+        <label asp-for="Amount">סכום לתשלום</label>
+        <input asp-for="Amount" type="number" />
+        </div>
+    </div>
+    <br/>
+    <input type="submit" name="Submit" value="Submit" />
+}
+

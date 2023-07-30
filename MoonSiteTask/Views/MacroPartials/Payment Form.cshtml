@@ -1,0 +1,7 @@
+﻿@inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage;
+
+@using PaymentForm.Models;
+
+@{
+    Html.RenderPartial("~/Views/Partials/PaymentForm.cshtml", new PaymentFormViewModel());
+}
