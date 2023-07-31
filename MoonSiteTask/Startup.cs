@@ -1,5 +1,18 @@
+using System.Linq;
+using MoonSiteTask.DbTest;
+using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Cms.Core.Notifications;
+
 namespace MoonSiteTask
 {
+                public static class UmbracoBuilderExtensions
+        {
+            public static IUmbracoBuilder AddPayments(this IUmbracoBuilder builder)
+            {
+                builder.AddNotificationHandler<UmbracoApplicationStartingNotification, RunPaymentsMigration>();
+                return builder;
+            }
+        }
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
@@ -27,6 +40,7 @@ namespace MoonSiteTask
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940.
         /// </remarks>
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddUmbraco(_env, _config)
@@ -34,6 +48,7 @@ namespace MoonSiteTask
                 .AddWebsite()
                 .AddDeliveryApi()
                 .AddComposers()
+                .AddPayments()
                 .Build();
         }
 
