@@ -18,34 +18,36 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	// Mixin Content Type with alias "formProps"
-	/// <summary>FormProps</summary>
-	public partial interface IFormProps : IPublishedElement
+	// Mixin Content Type with alias "paymentElemnet"
+	/// <summary>PaymentElemnet</summary>
+	public partial interface IPaymentElemnet : IPublishedElement
 	{
+		/// <summary>Amount</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
+		int Amount { get; }
+
 		/// <summary>AptNumber</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		global::System.Collections.Generic.IEnumerable<string> AptNumber { get; }
+		int AptNumber { get; }
 
 		/// <summary>FullName</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		string FullName { get; }
 
-		/// <summary>PaymentMonth</summary>
+		/// <summary>PaymentId</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		global::System.Collections.Generic.IEnumerable<string> PaymentMonth { get; }
+		int PaymentId { get; }
 	}
 
-	/// <summary>FormProps</summary>
-	[PublishedModel("formProps")]
-	public partial class FormProps : PublishedElementModel, IFormProps
+	/// <summary>PaymentElemnet</summary>
+	[PublishedModel("paymentElemnet")]
+	public partial class PaymentElemnet : PublishedElementModel, IPaymentElemnet
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		public new const string ModelTypeAlias = "formProps";
+		public new const string ModelTypeAlias = "paymentElemnet";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
@@ -54,14 +56,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<FormProps, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PaymentElemnet, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public FormProps(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public PaymentElemnet(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -70,42 +72,49 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// AptNumber
+		/// Amount: Amount of payment
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("amount")]
+		public virtual int Amount => GetAmount(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Amount</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
+		public static int GetAmount(IPaymentElemnet that, IPublishedValueFallback publishedValueFallback) => that.Value<int>(publishedValueFallback, "amount");
+
+		///<summary>
+		/// AptNumber: Aprtment number
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[ImplementPropertyType("aptNumber")]
-		public virtual global::System.Collections.Generic.IEnumerable<string> AptNumber => GetAptNumber(this, _publishedValueFallback);
+		public virtual int AptNumber => GetAptNumber(this, _publishedValueFallback);
 
 		/// <summary>Static getter for AptNumber</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::System.Collections.Generic.IEnumerable<string> GetAptNumber(IFormProps that, IPublishedValueFallback publishedValueFallback) => that.Value<global::System.Collections.Generic.IEnumerable<string>>(publishedValueFallback, "aptNumber");
+		public static int GetAptNumber(IPaymentElemnet that, IPublishedValueFallback publishedValueFallback) => that.Value<int>(publishedValueFallback, "aptNumber");
 
 		///<summary>
-		/// FullName
+		/// FullName: name of resident
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("fullName")]
+		[ImplementPropertyType("FullName")]
 		public virtual string FullName => GetFullName(this, _publishedValueFallback);
 
 		/// <summary>Static getter for FullName</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetFullName(IFormProps that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "fullName");
+		public static string GetFullName(IPaymentElemnet that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "FullName");
 
 		///<summary>
-		/// PaymentMonth
+		/// PaymentId: id of payment
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("paymentMonth")]
-		public virtual global::System.Collections.Generic.IEnumerable<string> PaymentMonth => GetPaymentMonth(this, _publishedValueFallback);
+		[ImplementPropertyType("paymentId")]
+		public virtual int PaymentId => GetPaymentId(this, _publishedValueFallback);
 
-		/// <summary>Static getter for PaymentMonth</summary>
+		/// <summary>Static getter for PaymentId</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::System.Collections.Generic.IEnumerable<string> GetPaymentMonth(IFormProps that, IPublishedValueFallback publishedValueFallback) => that.Value<global::System.Collections.Generic.IEnumerable<string>>(publishedValueFallback, "paymentMonth");
+		public static int GetPaymentId(IPaymentElemnet that, IPublishedValueFallback publishedValueFallback) => that.Value<int>(publishedValueFallback, "paymentId");
 	}
 }

@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>MainPage</summary>
-	[PublishedModel("mainPage")]
-	public partial class MainPage : PublishedContentModel, IFormProps, IHeaderProps
+	/// <summary>DataProps</summary>
+	[PublishedModel("dataProps")]
+	public partial class DataProps : PublishedElementModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		public new const string ModelTypeAlias = "mainPage";
+		public new const string ModelTypeAlias = "dataProps";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
@@ -34,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<MainPage, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<DataProps, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public MainPage(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public DataProps(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,35 +50,39 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// AptNumber
+		/// Amount: Amount of payment
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("aptNumber")]
-		public virtual global::System.Collections.Generic.IEnumerable<string> AptNumber => global::Umbraco.Cms.Web.Common.PublishedModels.FormProps.GetAptNumber(this, _publishedValueFallback);
+		[ImplementPropertyType("amount")]
+		public virtual int Amount => this.Value<int>(_publishedValueFallback, "amount");
 
 		///<summary>
-		/// FullName
+		/// Date: Date of payment
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("fullName")]
-		public virtual string FullName => global::Umbraco.Cms.Web.Common.PublishedModels.FormProps.GetFullName(this, _publishedValueFallback);
+		[ImplementPropertyType("date")]
+		public virtual global::System.DateTime Date => this.Value<global::System.DateTime>(_publishedValueFallback, "date");
 
 		///<summary>
-		/// PaymentMonth
+		/// MonthPayed: Month string value
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("paymentMonth")]
-		public virtual global::System.Collections.Generic.IEnumerable<string> PaymentMonth => global::Umbraco.Cms.Web.Common.PublishedModels.FormProps.GetPaymentMonth(this, _publishedValueFallback);
+		[ImplementPropertyType("MonthPayed")]
+		public virtual string MonthPayed => this.Value<string>(_publishedValueFallback, "MonthPayed");
 
 		///<summary>
-		/// Title
+		/// checkId: Id of Check or Transfer
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("title")]
-		public virtual string Title => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderProps.GetTitle(this, _publishedValueFallback);
+		[ImplementPropertyType("payId")]
+		public virtual int PayId => this.Value<int>(_publishedValueFallback, "payId");
+
+		///<summary>
+		/// PaymentId: Id of Payment
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
+		[ImplementPropertyType("PaymentId")]
+		public virtual int PaymentId => this.Value<int>(_publishedValueFallback, "PaymentId");
 	}
 }
