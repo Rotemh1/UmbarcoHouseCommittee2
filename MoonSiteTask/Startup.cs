@@ -5,18 +5,14 @@ using Umbraco.Cms.Core.Notifications;
 
 namespace MoonSiteTask
 {
-                public static class UmbracoBuilderExtensions
+            public static class UmbracoBuilderExtensions
         {
-            public static IUmbracoBuilder AddPayments(this IUmbracoBuilder builder)
-            {
-                builder.AddNotificationHandler<UmbracoApplicationStartingNotification, RunPaymentsMigration>();
-                return builder;
-            }
-                        public static IUmbracoBuilder AddRecipts(this IUmbracoBuilder builder)
-            {
-                builder.AddNotificationHandler<UmbracoApplicationStartingNotification, RunReciptsMigration>();
-                return builder;
-            }
+            // public static IUmbracoBuilder AddRecipts(this IUmbracoBuilder builder)
+            // {
+            //     builder.AddNotificationHandler<UmbracoApplicationStartingNotification, RunReciptsMigration>();
+            //     return builder;
+            // }
+
         }
     public class Startup
     {
@@ -53,8 +49,7 @@ namespace MoonSiteTask
                 .AddWebsite()
                 .AddDeliveryApi()
                 .AddComposers()
-                .AddPayments()
-                .AddRecipts()
+                // .AddRecipts()
                 .Build();
         }
 

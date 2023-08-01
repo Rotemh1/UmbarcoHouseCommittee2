@@ -4,6 +4,7 @@ using NPoco;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Migrations;
+using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Infrastructure.Migrations;
@@ -15,7 +16,6 @@ namespace MoonSiteTask.DbTest
     public class ReciptsComposer : ComponentComposer<ReciptsComponent>
     {
     }
-
     public class ReciptsComponent : IComponent
     {
         private readonly ICoreScopeProvider _coreScopeProvider;
@@ -49,7 +49,7 @@ namespace MoonSiteTask.DbTest
             // This is the steps we need to take
             // Each step in the migration adds a unique value
             migrationPlan.From(string.Empty)
-                .To<AddCommentsTable>("recipts-db");
+                .To<AddReciptsTable>("recipts-db");
 
             // Go and upgrade our site (Will check if it needs to do the work or not)
             // Based on the current/latest step
@@ -87,7 +87,7 @@ namespace MoonSiteTask.DbTest
         [ExplicitColumns]
         public class ReciptSchema
         {
-            public ReciptSchema(int AptNum, string ResName, int Amount, int[] Month, string PayedWith, string DayPayed)
+            public ReciptSchema(int AptNum, string ResName, int Amount, string Month, string PayedWith, string DayPayed)
             {  
                 this.AptNum = AptNum;
                 this.Amount = Amount;
@@ -107,7 +107,7 @@ namespace MoonSiteTask.DbTest
             public int Amount { get; set; }
 
             [Column("Month")]
-            public int[] Month { get; set; }
+            public string? Month { get; set; }
 
             [Column("PayedWith")]
             public string? PayedWith { get; set; }

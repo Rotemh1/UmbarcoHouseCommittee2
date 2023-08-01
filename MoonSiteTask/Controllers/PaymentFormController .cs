@@ -9,6 +9,7 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Web.Website.Controllers;
 using static MoonSiteTask.DbTest.AddCommentsTable;
+using static MoonSiteTask.DbTest.AddReciptsTable;
 
 namespace MoonSiteTask.Controllers
 {
@@ -34,10 +35,15 @@ namespace MoonSiteTask.Controllers
             }
             
             var scope = _databaseFactory.CreateDatabase();
-            var a = new PaymentSchema(2, "aviv", 350, "may", "Transfer");
+            var a = new PaymentSchema(2, "aviv", 350, 4, "Transfer");
             scope.Insert<PaymentSchema>(a);
             scope.CompleteTransaction();
-
+            var day = new DateTime();
+            string str = day.ToShortDateString();
+            int[] arr = {3,4};
+            var b = new ReciptSchema(3, "chop", 500, "4,7", "Cash", str);
+            scope.Insert<ReciptSchema>(b);
+            scope.CompleteTransaction();
             return RedirectToCurrentUmbracoPage();
         }
     }

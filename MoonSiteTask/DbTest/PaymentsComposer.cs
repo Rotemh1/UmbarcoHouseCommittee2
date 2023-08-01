@@ -4,6 +4,7 @@ using NPoco;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Migrations;
+using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Infrastructure.Migrations;
@@ -87,7 +88,7 @@ namespace MoonSiteTask.DbTest
         [ExplicitColumns]
         public class PaymentSchema
         {
-            public PaymentSchema(int AptNum, string ResName, int Amount, string Month, string PayedWith)
+            public PaymentSchema(int AptNum, string ResName, int Amount, int Month, string PayedWith)
             {  
                 this.AptNum = AptNum;
                 this.ResName = ResName;
@@ -110,7 +111,7 @@ namespace MoonSiteTask.DbTest
             public int Amount { get; set; }
 
             [Column("Month")]
-            public string? Month { get; set; }
+            public int Month { get; set; }
 
             [Column("PayedWith")]
             public string? PayedWith { get; set; }
