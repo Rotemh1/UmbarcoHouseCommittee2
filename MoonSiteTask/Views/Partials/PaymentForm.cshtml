@@ -2,66 +2,78 @@
 @model MoonSiteTask.Models.PaymentFormViewModel
 @using (Html.BeginUmbracoForm<PaymentFormController>(nameof(PaymentFormController.Submit)))
 {
-
+    <style>
+        .validation{
+            display: none;            
+        }
+        .invalid{
+            display: block !important;
+            color: red;
+        }
+    </style>
     <div class="input-group">
         <div class="form-div">
-        <label asp-for="ResName">שם הדייר</label>
+        <label asp-for="ResName">שם הדייר</label> <br />
         <input asp-for="ResName" type="text" />
+        <br />
+        @Html.ValidationMessageFor(m => m.ResName)
         </div>
+
         <div class="form-div">
         <label asp-for="AptNum">מס' דירה</label>
         <select asp-for="AptNum" >
+            <option value="">בחר</option>
         @{
             for(int i=1; i<=12; i++){
                 <option value="@i">@i</option>
             }
         }
         </select >
+        <div>@Html.ValidationMessageFor(m => m.ResName)</div>
         </div>
         <div class="form-div">
+            <div>
                 <label>חודש לתשלום</label>
-                <input type="checkbox" value="0" id="jan" asp/>
-                <label for="jan">ינואר</label>
-                <input type="checkbox" value="1" id="feb"/>
-                <label for="feb">פברואר</label>                
-                <input type="checkbox" value="2" id="mar"/>
-                <label for="mar">מרץ</label>
-                <input type="checkbox" value="3" id="apr"/>
-                <label for="apr">אפריל</label>
-                <input type="checkbox" value="4" id="may"/>
-                <label for="may">מאי</label>
-                <input type="checkbox" value="5" id="jun"/>
-                <label for="jun">יוני</label>
-                <input type="checkbox" value="6" id="jul"/>
-                <label for="jul">יולי</label>
-                <input type="checkbox" value="7" id="aug"/>
-                <label for="aug">אוגוסט</label>
-                <input type="checkbox" value="8" id="sep"/>
-                <label for="sep">ספטמבר</label>
-                <input type="checkbox" value="9" id="oct"/>
-                <label for="oct">אוקטובר</label>
-                <input type="checkbox" value="10" id="nov"/>
-                <label for="nov">נובמבר</label>
-                <input type="checkbox" value="11" id="dec"/>
-                <label for="dec">דצמבר</label>
+            </div>
+                @{
+                    var months = new List<string> { "","ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר" };
+                    for (int i = 1; i < months.Count; i++)
+                    {
+                        <input type="checkbox" name="PayMonth[]" value="@i" id="month-@i" />
+                        <label for="month-@i">@months[i]</label>
+                        if(i%4 == 0){
+                            <br />
+                        }
+                    }
+                }
+                
+                @Html.ValidationMessageFor(m => m.PayMonth)
         </div>
         <div class="form-div">
-        <label asp-for="PayedWith">שולם באמצעות</label>
-            <input type="radio" id="CreditCard" name="fav_language" value="CreditCard" asp-for="PayedWith">
-            <label for="CreditCard">CreditCard</label><br>
-            <input type="radio" id="Cash" name="fav_language" value="Cash" asp-for="PayedWith">
-            <label for="Cash">Cash</label><br>
-            <input type="radio" id="Transfer" name="fav_language" value="Transfer" asp-for="PayedWith">
-            <label for="Transfer">Transfer</label>
-            <input type="radio" id="checkPayment" name="fav_language" value="checkPayment" asp-for="PayedWith">
-            <label for="checkPayment">checkPayment</label>
+        <label asp-for="PayedWith">שולם באמצעות</label> <br />
+            <input type="radio" id="CreditCard" name="PayedWith" value="CreditCard" asp-for="PayedWith">
+            <label for="CreditCard">CreditCard</label><br />
+            <input type="radio" id="Cash" name="PayedWith" value="Cash" asp-for="PayedWith">
+            <label for="Cash">Cash</label><br />
+            <input type="radio" id="Transfer" name="PayedWith" value="Transfer" asp-for="PayedWith">
+            <label for="Transfer">Transfer</label> <br />
+            <input type="radio" id="checkPayment" name="PayedWith" value="checkPayment" asp-for="PayedWith">
+            <label for="checkPayment">checkPayment</label> <br/>
+            @Html.ValidationMessageFor(m => m.PayedWith)
         </div>
         <div class="form-div">
         <label asp-for="Amount">סכום לתשלום</label>
-        <input asp-for="Amount" type="number" />
+        <input asp-for="Amount" type="number" placeholder=" " min="1"/>
+        @Html.ValidationMessageFor(m => m.Amount)
         </div>
     </div>
     <br/>
-    <input type="submit" name="Submit" value="Submit" />
+@if (TempData["ErrorMsg"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMsg"]
+        </div>
+    }
+    <input class="submit-btn" type="submit" name="Submit" value="Submit" />
 }
 

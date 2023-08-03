@@ -87,7 +87,7 @@ namespace MoonSiteTask.DbTest
         [ExplicitColumns]
         public class ReciptSchema
         {
-            public ReciptSchema(int AptNum, string ResName, int Amount, string Month, string PayedWith, string DayPayed)
+            public ReciptSchema(int AptNum, int Amount, string Month, string PayedWith, string DayPayed)
             {  
                 this.AptNum = AptNum;
                 this.Amount = Amount;

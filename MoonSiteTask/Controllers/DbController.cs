@@ -7,6 +7,7 @@ using static MoonSiteTask.DbTest.AddReciptsTable;
 
 namespace MoonSiteTask.Controllers
 {
+    //db api controller
     public class PaymentsApiController : UmbracoApiController
     {
         private readonly IScopeProvider _scopeProvider;
@@ -15,10 +16,19 @@ namespace MoonSiteTask.Controllers
             _scopeProvider = scopeProvider;
         }
         [HttpGet]
-        public IEnumerable<PaymentSchema> GetComments(int umbracoNodeId)
+        public IEnumerable<PaymentSchema> GetMonths()
         {
             using var scope = _scopeProvider.CreateScope();
-            var queryResults = scope.Database.Fetch<PaymentSchema>("SELECT * FROM Payments WHERE BlogPostUmbracoId = @0", umbracoNodeId);
+            var queryResults = scope.Database.Fetch<PaymentSchema>("SELECT * FROM Payments");
+            scope.Complete();
+            return queryResults;
+        }
+        [HttpGet]
+        public IEnumerable<PaymentSchema> GetPaymentsByApt(int Apt)
+        {
+            using var scope = _scopeProvider.CreateScope();
+            string sqlquery = "SELECT * FROM Payments WHERE AptNum = " + Apt;
+            var queryResults = scope.Database.Fetch<PaymentSchema>(sqlquery);
             scope.Complete();
             return queryResults;
         }
@@ -38,10 +48,10 @@ namespace MoonSiteTask.Controllers
             _scopeProvider = scopeProvider;
         }
         [HttpGet]
-        public IEnumerable<ReciptSchema> GetComments(int umbracoNodeId)
+        public IEnumerable<ReciptSchema> GetRecipts()
         {
             using var scope = _scopeProvider.CreateScope();
-            var queryResults = scope.Database.Fetch<ReciptSchema>("SELECT * FROM Recipts WHERE BlogPostUmbracoId = @0", umbracoNodeId);
+            var queryResults = scope.Database.Fetch<ReciptSchema>("SELECT * FROM Recipts");
             scope.Complete();
             return queryResults;
         }

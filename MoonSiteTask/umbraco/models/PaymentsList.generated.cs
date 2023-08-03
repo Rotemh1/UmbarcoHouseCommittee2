@@ -18,19 +18,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	// Mixin Content Type with alias "paymentsList"
-	/// <summary>PaymentsList</summary>
-	public partial interface IPaymentsList : IPublishedElement
-	{
-		/// <summary>Payments</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		object Payments { get; }
-	}
-
 	/// <summary>PaymentsList</summary>
 	[PublishedModel("paymentsList")]
-	public partial class PaymentsList : PublishedElementModel, IPaymentsList
+	public partial class PaymentsList : PublishedElementModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -65,11 +55,6 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("payments")]
-		public virtual object Payments => GetPayments(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Payments</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static object GetPayments(IPaymentsList that, IPublishedValueFallback publishedValueFallback) => that.Value(publishedValueFallback, "payments");
+		public virtual object Payments => this.Value(_publishedValueFallback, "payments");
 	}
 }

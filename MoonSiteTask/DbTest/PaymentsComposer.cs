@@ -88,13 +88,14 @@ namespace MoonSiteTask.DbTest
         [ExplicitColumns]
         public class PaymentSchema
         {
-            public PaymentSchema(int AptNum, string ResName, int Amount, int Month, string PayedWith)
+            public PaymentSchema(int AptNum, string ResName, int Amount, int Month, string PayedWith, int ReciptId)
             {  
                 this.AptNum = AptNum;
                 this.ResName = ResName;
                 this.Amount = Amount;
                 this.Month = Month;
                 this.PayedWith = PayedWith;
+                this.ReciptId = ReciptId;
             }
 
             [PrimaryKeyColumn(AutoIncrement = true, IdentitySeed = 1)]
@@ -115,6 +116,9 @@ namespace MoonSiteTask.DbTest
 
             [Column("PayedWith")]
             public string? PayedWith { get; set; }
+            
+            [Column("ReciptId")]
+            public int ReciptId { get; set; }
         }
     }
 }

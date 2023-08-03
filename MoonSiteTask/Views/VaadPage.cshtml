@@ -1,0 +1,115 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.VaadPage>
+@using MoonSiteTask.Models;
+@using MoonSiteTask.Controllers;
+@using System.Net.Http;
+@using System.Text.Json;
+
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+<html>
+<style>
+    .headerdiv{
+        direction: rtl;
+        font-size: 40px;
+    }
+    .maindiv{
+    display: flex;
+    flex-direction: row;
+    direction: rtl;
+    overflow-x: scroll;
+}
+.windowdiv{
+    display: flex;
+    flex-direction: column;
+    border: 1.5px solid;
+    border-radius: 2px;
+    border-color: black;
+    margin: 10px;
+    padding: 5px;
+}
+    .hoverdiv{
+    width: 230px;
+    font-size: 25px;
+    
+}
+.monthdiv{
+font-size: 25px;
+
+}
+.indexDisplay{
+    font-size: 25px;
+    direction: rtl;
+}
+.displaydiv{
+    direction: rtl;
+    width: 230px;
+    font-size: 25px;
+}
+</style>
+<div class="headerdiv">
+    תשלומי ועד הבית
+</div>
+
+<div class="maindiv">
+@{
+        var reciplist = new List<Recipt>();
+        using (var HttpClient = new HttpClient()){
+        var res = await HttpClient.GetAsync("https://localhost:44327/umbraco/api/ReciptsApi/GetRecipts");
+        if(res.IsSuccessStatusCode){
+            var resString = await res.Content.ReadAsStringAsync();
+            var ReciptsVals = JsonSerializer.Deserialize<List<Recipt>>(resString,
+                new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+            reciplist = ReciptsVals;
+        }
+    }
+	Layout = null;
+    //HttpGet for months
+    using (var HttpClient = new HttpClient()){
+        var response = await HttpClient.GetAsync("https://localhost:44327/umbraco/api/PaymentsApi/GetMonths");
+        if(response.IsSuccessStatusCode){
+        var responseString = await response.Content.ReadAsStringAsync();
+        var paymentVals = JsonSerializer.Deserialize<List<Payment>>(responseString, 
+            new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+            if(paymentVals != null){
+            var GroupedPayments = paymentVals.GroupBy(x => x.Month);
+            foreach(var MonthGroup in GroupedPayments){
+                <div class="windowdiv">
+                <div class="monthdiv">חודש @MonthGroup.Key</div>
+                @{foreach(var MonthDetails in MonthGroup){
+                    var ReciptById = reciplist?.First( x => x.Id == MonthDetails.ReciptId); 
+                    string JsonedRecipt = Newtonsoft.Json.JsonConvert.SerializeObject(ReciptById);
+                    <div class="hoverdiv" data-info="@JsonedRecipt">דירה @MonthDetails.AptNum @MonthDetails.ResName     @MonthDetails.Amount שח</div>
+                }}
+                </div>
+            }
+            }
+        }
+    }
+}
+</div>
+<div class="displaydiv">
+    <div id="indexDisplay"></div>
+
+</div>
+<script>
+        var divs = document.querySelectorAll('.hoverdiv');
+        var indexDisplay = document.getElementById('IndexDisplay');
+
+        divs.forEach(function(div, index) {
+            div.addEventListener('mouseover', function() { 
+                const info = div.getAttribute('data-info');
+                const jsoninfo = JSON.parse(info);
+                indexDisplay.textContent = "מס' קבלה" + jsoninfo.Id + 
+                "\n" + "שולם בתאריך:" + jsoninfo.DayPayed + 
+                "\n\n" + "בסכום:" jsoninfo.Amount + 
+                "\n" + "עבור חודשים: " + jsoninfo.Month + 
+                "\n" + "באמצעות " + jsoninfo.PayedWith;
+            });
+            
+            div.addEventListener('mouseout', function() { 
+                indexDisplay.textContent = "";
+            });
+        });
+</script>
+
+</html>

@@ -18,23 +18,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	// Mixin Content Type with alias "paymentsMonthsList"
-	/// <summary>PaymentsMonthsList</summary>
-	public partial interface IPaymentsMonthsList : IPublishedElement
-	{
-		/// <summary>Month</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		global::System.DateTime Month { get; }
-
-		/// <summary>Paymentslst</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Paymentslst { get; }
-	}
-
 	/// <summary>PaymentsMonthsList</summary>
 	[PublishedModel("paymentsMonthsList")]
-	public partial class PaymentsMonthsList : PublishedElementModel, IPaymentsMonthsList
+	public partial class PaymentsMonthsList : PublishedElementModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -68,11 +54,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[ImplementPropertyType("Month")]
-		public virtual global::System.DateTime Month => GetMonth(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Month</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		public static global::System.DateTime GetMonth(IPaymentsMonthsList that, IPublishedValueFallback publishedValueFallback) => that.Value<global::System.DateTime>(publishedValueFallback, "Month");
+		public virtual global::System.DateTime Month => this.Value<global::System.DateTime>(_publishedValueFallback, "Month");
 
 		///<summary>
 		/// Paymentslst: list of payments
@@ -80,11 +62,6 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("paymentslst")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Paymentslst => GetPaymentslst(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Paymentslst</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.0.1+20a4e47")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::Umbraco.Cms.Core.Models.Blocks.BlockListModel GetPaymentslst(IPaymentsMonthsList that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(publishedValueFallback, "paymentslst");
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Paymentslst => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "paymentslst");
 	}
 }
