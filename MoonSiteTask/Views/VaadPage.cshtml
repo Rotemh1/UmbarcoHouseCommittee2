@@ -51,7 +51,8 @@ font-size: 25px;
 </div>
 
 <div class="maindiv">
-@{
+@{      
+    //HttpGet for Recipts
         var reciplist = new List<Recipt>();
         using (var HttpClient = new HttpClient()){
         var res = await HttpClient.GetAsync("https://localhost:44327/umbraco/api/ReciptsApi/GetRecipts");

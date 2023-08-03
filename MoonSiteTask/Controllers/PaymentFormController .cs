@@ -47,7 +47,7 @@ namespace MoonSiteTask.Controllers
             foreach(var payid in PaymentsVals){
                 foreach(int month in model.PayMonth!)
                 if(month == payid.Month){
-                    TempData["ErrorMsg"] = "already exists";
+                    TempData["ErrorMsg"] = "בוצע בעבר תשלום עבור חודש" + month;
                     return CurrentUmbracoPage();
                 }
             }}

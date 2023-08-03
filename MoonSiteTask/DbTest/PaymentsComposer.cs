@@ -13,6 +13,7 @@ using Umbraco.Cms.Infrastructure.Persistence.DatabaseAnnotations;
 
 namespace MoonSiteTask.DbTest
 {
+    //Composer for payment migrations
     public class PaymentsComposer : ComponentComposer<PaymentsComponent>
     {
     }

@@ -15,6 +15,7 @@ namespace MoonSiteTask.Controllers
         {
             _scopeProvider = scopeProvider;
         }
+        //get all Payments 
         [HttpGet]
         public IEnumerable<PaymentSchema> GetMonths()
         {
@@ -23,6 +24,7 @@ namespace MoonSiteTask.Controllers
             scope.Complete();
             return queryResults;
         }
+        //get request for double payments validation
         [HttpGet]
         public IEnumerable<PaymentSchema> GetPaymentsByApt(int Apt)
         {
@@ -32,6 +34,7 @@ namespace MoonSiteTask.Controllers
             scope.Complete();
             return queryResults;
         }
+        //post request for payments
         [HttpPost]
         public void InsertComment(PaymentSchema payment)
         {
@@ -47,6 +50,7 @@ namespace MoonSiteTask.Controllers
         {
             _scopeProvider = scopeProvider;
         }
+        //get all recipts
         [HttpGet]
         public IEnumerable<ReciptSchema> GetRecipts()
         {
@@ -55,6 +59,7 @@ namespace MoonSiteTask.Controllers
             scope.Complete();
             return queryResults;
         }
+        //post request for recipts
         [HttpPost]
         public void InsertComment(ReciptSchema recipt)
         {

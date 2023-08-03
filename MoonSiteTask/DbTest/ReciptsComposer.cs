@@ -13,6 +13,7 @@ using Umbraco.Cms.Infrastructure.Persistence.DatabaseAnnotations;
 
 namespace MoonSiteTask.DbTest
 {
+    //Composer for recipts migrations
     public class ReciptsComposer : ComponentComposer<ReciptsComponent>
     {
     }
